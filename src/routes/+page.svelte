@@ -1,33 +1,24 @@
 <script lang="ts">
-  import Sequence from "$lib/Sequence.svelte";
+  import SeqList from "$lib/SeqList.svelte";
   // import { scaleBand, scaleLinear } from "d3-scale";
-
-  let width = 1200;
-  let height = 1200;
-
-  // let musicalTicks = 128;
-
-  let seqs = [
-    {
-      id: 1,
-      pulses: 2,
-      steps: 4,
-      rotation: 0,
-      ticks: 16
-    },
-    {
-      id: 2,
-      pulses: 3,
-      steps: 13,
-      rotation: 0,
-      ticks: 16
-    }
-  ];
 </script>
 
+<div class="top">
+  <h1>euclidean rhythm generator</h1>
+</div>
 
 <div>
-  {#each seqs as seq}
-    <Sequence {seq} />
-  {/each}
+  <SeqList />
 </div>
+
+<style>
+  :global(body) {
+    background-color: #709e7d;
+    font-family: monospace;
+  }
+
+  div.top {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+</style>
