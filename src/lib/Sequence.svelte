@@ -19,9 +19,16 @@
   </div>
 
   <div class="seq-controls">
-    <input type=number value={seq.pulses}>
-    <input type=number value={seq.steps}>
-    <input type=number value={seq.rotation}>
+    <label for="pulses">Pulses </label>
+    <input name="pulses" type=number value={seq.pulses}>
+
+    <label for="steps"> Steps </label>
+    <input name="steps" type=number value={seq.steps}>
+
+    <label for="rotation"> Rotation </label>
+    <input name="rotation" type=number value={seq.rotation}>
+
+    <button>X</button>
   </div>
 
 </div>
@@ -52,4 +59,14 @@
   div.on {
     background-color: lightgreen;
   }
+
+  input {
+    max-width: 80px;
+    padding: 10px;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: lightgray;
+    border: 0;
+  }
+
 </style>
