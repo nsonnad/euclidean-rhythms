@@ -1,5 +1,6 @@
 import { writable } from "svelte/store";
 import { getPattern } from 'euclidean-rhythms';
+import type SequenceType from './SeqenceType';
 
 function generateRandomSequence() {
   let randVals = [
@@ -14,12 +15,11 @@ function generateRandomSequence() {
     pulses: randVals[0],
     steps: randVals[1],
     rotation: 0,
-    pattern: getPattern(randVals[0], randVals[1]),
-    ticks: 16
+    pattern: getPattern(randVals[0], randVals[1])
   }
 }
 
-function newRandomSequence(currentSeqs) {
+function newRandomSequence(currentSeqs: SequenceType[]) {
   return [...currentSeqs, generateRandomSequence()];
 }
 

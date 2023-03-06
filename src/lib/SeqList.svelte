@@ -1,8 +1,8 @@
 <script>
-  import { SeqStore } from '../stores/SeqStore.js';
+  import { SeqStore } from '../stores/SeqStore';
   import Sequence from './Sequence.svelte';
 
-  const handleAdd = () => {
+  function handleAdd() {
     SeqStore.newRandomSequence();
   }
 </script>
