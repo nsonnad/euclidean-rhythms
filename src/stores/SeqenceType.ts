@@ -3,6 +3,7 @@ type SequenceType = {
   pulses: number,
   steps: number,
   rotation: number,
+  sound: string,
   pattern: number[]
 }
 

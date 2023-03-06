@@ -2,6 +2,8 @@ import { writable } from "svelte/store";
 import { getPattern } from 'euclidean-rhythms';
 import type SequenceType from './SeqenceType';
 
+const synthTypes = ["sine", "triangle", "sawtooth", "square"];
+
 function generateRandomSequence() {
   let randVals = [
     Math.ceil(Math.random() * 16),
@@ -15,6 +17,7 @@ function generateRandomSequence() {
     pulses: randVals[0],
     steps: randVals[1],
     rotation: 0,
+    sound: synthTypes[Math.floor(Math.random()*synthTypes.length)],
     pattern: getPattern(randVals[0], randVals[1])
   }
 }
