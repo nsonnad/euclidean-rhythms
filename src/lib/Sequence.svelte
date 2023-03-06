@@ -1,8 +1,27 @@
 <script lang="ts">
   export let seq;
+import { getPattern } from 'euclidean-rhythms';
 
   import { SeqStore } from '../stores/SeqStore.js';
   import SeqControls from './SeqControls.svelte';
+
+  function handleDeleteSeq(id) {
+    SeqStore.update(currentData => {
+      return currentData.filter(d => d.id !== id);
+    })
+  }
+
+  function handleUpdateParm(e, id, param) {
+    SeqStore.update(currentData => {
+      let copiedData = [...currentData];
+      let currentSeq = copiedData.find(seq => seq.id == id)
+
+      currentSeq[param] = parseInt(e.target.value);
+      currentSeq.pattern = getPattern(seq.pulses, seq.steps)
+
+      return copiedData;
+    })
+  }
 </script>
 
 
@@ -20,15 +39,27 @@
 
   <div class="seq-controls">
     <label for="pulses">Pulses </label>
-    <input name="pulses" type=number value={seq.pulses}>
+    <input on:change={e => handleUpdateParm(e, seq.id, "pulses")}
+           name="pulses"
+           type=number
+           value={seq.pulses}
+           >
 
     <label for="steps"> Steps </label>
-    <input name="steps" type=number value={seq.steps}>
+    <input on:change={e => handleUpdateParm(e, seq.id, "steps")}
+           name="steps"
+           type=number
+           value={seq.steps}
+           >
 
     <label for="rotation"> Rotation </label>
-    <input name="rotation" type=number value={seq.rotation}>
+    <input on:change={e => handleUpdateParm(e, seq.id, "rotation")}
+           name="rotation"
+           type=number
+           value={seq.rotation}
+           >
 
-    <button>X</button>
+    <button on:click={handleDeleteSeq(seq.id)}>X</button>
   </div>
 
 </div>

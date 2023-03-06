@@ -30,6 +30,7 @@ function createSeqStore() {
   return {
     subscribe,
     set,
+    update,
     newRandomSequence: () => update(currentSeqs => newRandomSequence(currentSeqs))
   }
 }
