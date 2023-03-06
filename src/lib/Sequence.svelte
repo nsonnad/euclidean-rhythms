@@ -17,7 +17,7 @@ import { getPattern } from 'euclidean-rhythms';
       let currentSeq = copiedData.find(seq => seq.id == id)
 
       currentSeq[param] = parseInt(e.target.value);
-      currentSeq.pattern = getPattern(seq.pulses, seq.steps)
+      currentSeq.pattern = getPattern(currentSeq.pulses, currentSeq.steps)
 
       return copiedData;
     })
@@ -42,6 +42,8 @@ import { getPattern } from 'euclidean-rhythms';
     <input on:change={e => handleUpdateParm(e, seq.id, "pulses")}
            name="pulses"
            type=number
+           min=1
+           max={seq.steps}
            value={seq.pulses}
            >
 
@@ -49,6 +51,7 @@ import { getPattern } from 'euclidean-rhythms';
     <input on:change={e => handleUpdateParm(e, seq.id, "steps")}
            name="steps"
            type=number
+           min={seq.pulses}
            value={seq.steps}
            >
 
@@ -56,6 +59,8 @@ import { getPattern } from 'euclidean-rhythms';
     <input on:change={e => handleUpdateParm(e, seq.id, "rotation")}
            name="rotation"
            type=number
+           min=0
+           max={seq.steps}
            value={seq.rotation}
            >
 
