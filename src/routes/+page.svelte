@@ -1,7 +1,5 @@
 <script lang="ts">
   import * as Tone from "tone";
-  import { onMount } from 'svelte';
-
   import SeqList from "$lib/SeqList.svelte";
   import Transport from "$lib/Transport.svelte";
 

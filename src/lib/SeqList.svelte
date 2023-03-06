@@ -1,9 +1,10 @@
 <script lang="ts">
   export let Tone;
-  let toneSeqs = null;
+  let mounted = false;
 
   import { onMount } from 'svelte';
   import { SeqStore } from '../stores/SeqStore';
+  import type SequenceType from '../stores/SeqenceType';
   import Sequence from './Sequence.svelte';
 
   function handleAdd() {
@@ -15,7 +16,7 @@
     return null;
   }
 
-  function setToneSeqs(seqs) {
+  function setToneSeqs(seqs: SequenceType[]) {
     seqs.forEach((seq) => {
       let pattern = seq.pattern.map(binaryToNote);
       let synth = new Tone.Synth().toDestination();
@@ -28,11 +29,11 @@
   }
 
   onMount(() => {
-    toneSeqs = true;
+    mounted = true;
     setToneSeqs($SeqStore);
   })
 
-  $: if (toneSeqs != null) {
+  $: if (mounted) {
     setToneSeqs($SeqStore);
   }
 
