@@ -17,8 +17,9 @@
 
 <style>
   :global(body) {
-    background-color: #709e7d;
+    background-color: #1f1f1f;
     font-family: monospace;
+    color: lightgray;
   }
 
   div.top {

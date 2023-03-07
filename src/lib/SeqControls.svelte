@@ -28,10 +28,10 @@
 <div class="seq-controls">
 
   <div class="ui-item">
-    <label for="pulses">Pulses </label>
-    <input on:change={e => handleUpdateParam(e, seq.id, "pulses")}
+    <label for="pulses">Pulses: {seq.pulses} / {seq.steps} </label>
+    <input on:input={e => handleUpdateParam(e, seq.id, "pulses")}
            name="pulses"
-           type=number
+           type=range
            min=1
            max={seq.steps}
            value={seq.pulses}
@@ -39,21 +39,21 @@
   </div>
 
   <div class="ui-item">
-    <label for="steps"> Steps </label>
-    <input on:change={e => handleUpdateParam(e, seq.id, "steps")}
+    <label for="steps"> Steps: {seq.steps} </label>
+    <input on:input={e => handleUpdateParam(e, seq.id, "steps")}
            name="steps"
-           type=number
+           type=range
            min={seq.pulses}
-           max=32
+           max=16
            value={seq.steps}
            >
   </div>
 
   <div class="ui-item">
     <label for="rotation"> Rotation </label>
-    <input on:change={e => handleUpdateParam(e, seq.id, "rotation")}
+    <input on:input={e => handleUpdateParam(e, seq.id, "rotation")}
            name="rotation"
-           type=number
+           type=range
            min=0
            max={seq.steps}
            value={seq.rotation}
@@ -70,6 +70,8 @@
   div.seq-controls {
     display: flex;
     flex-grow: 1;
+    justify-content: center;
+    margin-bottom: 14px;
   }
 
   div.ui-item {
@@ -86,7 +88,8 @@
     padding: 10px;
     margin: 0;
     box-sizing: border-box;
-    background-color: lightgray;
+    background-color: #1f1f1f;
+    color: darkgray;
     border: 0;
   }
 

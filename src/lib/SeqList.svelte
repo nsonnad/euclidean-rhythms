@@ -12,8 +12,8 @@
 
 {#each $SeqStore as seq (seq.id)}
   <div class="sequence">
-    <Sequence {seq} {Tone} />
     <SeqControls {seq} />
+    <Sequence {seq} {Tone} />
 </div>
 {/each}
 
@@ -22,8 +22,9 @@
 <style>
   div.sequence {
     display: flex;
+    flex-direction: column;
     flex-wrap: nowrap;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     width: 100%;
   }
 </style>

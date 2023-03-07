@@ -77,20 +77,22 @@
 <style>
   div.steps {
     display: grid;
-    flex-grow: 10;
+    grid-gap: 4px;
   }
 
   div.step {
-    border: 1px solid black;
-    height: 50px;
+    border: 1px solid darkgray;
+    border-radius: 4px;
+    height: 70px;
   }
 
   div.current {
     background-color: lightblue;
+    border: 1px solid white;
   }
 
   div.on {
-    background-color: lightgreen;
+    background-color: #124a54;
   }
 
 </style>
