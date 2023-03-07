@@ -3,16 +3,19 @@
   Handles rendering and playback for a given sequence
 -->
 <script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
   import type SequenceType from '../stores/SeqenceType';
+  import type { Sequence } from 'tone';
+
+  import { onMount, onDestroy } from 'svelte';
 
   export let Tone;
   export let seq: SequenceType;
 
-  let toneSeq = null;
-  let toneSeqSixteenth = null;
-  let currentStep = null;
-  let mounted = null;
+  let toneSeq: Sequence;
+  let toneSeqSixteenth: Sequence;
+
+  let currentStep: number = -1;
+  let mounted: boolean = false;
 
   onMount(() => {
     mounted = true;
@@ -45,7 +48,7 @@
 
     toneSeqSixteenth.set({
       events: seq.pattern.map(sixteenthNotesPattern),
-      callback: (time, note) => { currentStep = note; }
+      callback: (time: number, note: number) => { currentStep = note; }
     }).start(0);
   }
 

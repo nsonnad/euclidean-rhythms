@@ -1,8 +1,9 @@
 <script lang="ts">
   import { getPattern } from 'euclidean-rhythms';
   import { SeqStore } from '../stores/SeqStore';
+  import type SequenceType from '../stores/SeqenceType';
 
-  export let seq;
+  export let seq: SequenceType;
 
   function handleDeleteSeq(id: number) {
     SeqStore.update(currentData => {
