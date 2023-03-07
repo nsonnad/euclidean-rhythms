@@ -3,8 +3,6 @@
   Handles rendering and playback for a given sequence
 -->
 <script lang="ts">
-    import {sequence} from '@sveltejs/kit/hooks';
-
   import { onMount, onDestroy } from 'svelte';
   import type SequenceType from '../stores/SeqenceType';
 
