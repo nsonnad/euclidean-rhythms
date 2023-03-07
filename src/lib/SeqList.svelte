@@ -1,47 +1,18 @@
 <script lang="ts">
   export let Tone;
-  let mounted = false;
 
-  import { onMount } from 'svelte';
   import { SeqStore } from '../stores/SeqStore';
-  import type SequenceType from '../stores/SeqenceType';
   import Sequence from './Sequence.svelte';
 
   function handleAdd() {
     SeqStore.newRandomSequence();
   }
 
-  function binaryToNote(n: number) {
-    if (n === 1) return "C3";
-    return null;
-  }
-
-  function setToneSeqs(seqs: SequenceType[]) {
-    seqs.forEach((seq) => {
-      let pattern = seq.pattern.map(binaryToNote);
-      let synth = new Tone.Synth().toDestination();
-      synth.oscillator.type = seq.sound;
-      const sq = new Tone.Sequence((time, note) => {
-        synth.triggerAttackRelease(note, 0.1, time);
-        // subdivisions are given as subarrays
-      }, pattern, "16n").start(0);
-    })
-  }
-
-  onMount(() => {
-    mounted = true;
-    setToneSeqs($SeqStore);
-  })
-
-  $: if (mounted) {
-    setToneSeqs($SeqStore);
-  }
-
   //let sounds = $SeqStore.map(() => new Synth());
 </script>
 
 {#each $SeqStore as seq (seq.id)}
-  <Sequence {seq} />
+  <Sequence {seq} {Tone} />
 {/each}
 
 <button on:click={handleAdd}>+ add sequence</button>

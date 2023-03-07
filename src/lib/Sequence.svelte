@@ -1,10 +1,51 @@
 <script lang="ts">
+  import { onMount, onDestroy } from 'svelte';
   import { getPattern } from 'euclidean-rhythms';
   import { SeqStore } from '../stores/SeqStore';
   import type SequenceType from '../stores/SeqenceType';
 
+  export let Tone;
   export let seq: SequenceType;
 
+  let toneSeq = null;
+  let toneSeqSixteenth = null;
+  let currentStep = null;
+  let mounted = null;
+
+  onMount(() => {
+    mounted = true;
+    // set up 16 note sequences on mount
+    toneSeq = new Tone.Sequence({ subdivision: "16n" });
+    toneSeqSixteenth = new Tone.Sequence({ subdivision: "16n" });
+
+    setToneSeq(seq);
+  })
+
+  onDestroy(() => {
+    if (toneSeq) toneSeq.dispose();
+    if (toneSeqSixteenth) toneSeqSixteenth.dispose();
+  })
+
+  $: if (mounted) {
+    setToneSeq(seq);
+  }
+
+  function setToneSeq(seq: SequenceType) {
+    let synth = new Tone.Synth().toDestination();
+    synth.oscillator.type = seq.sound;
+
+    toneSeq.set({
+      events: seq.pattern.map(binaryToNote),
+      callback: (time, note) => {
+        synth.triggerAttackRelease(note, 0.1, time);
+      }
+    }).start(0);
+
+    toneSeqSixteenth.set({
+      events: seq.pattern.map(sixteenthNotesPattern),
+      callback: (time, note) => { currentStep = note; }
+    }).start(0);
+  }
 
   function handleDeleteSeq(id: number) {
     SeqStore.update(currentData => {
@@ -12,7 +53,7 @@
     })
   }
 
-  function handleUpdateParm(e, id: number, param: string) {
+  function handleUpdateParam(e, id: number, param: string) {
     SeqStore.update(currentData => {
       let copiedData = [...currentData];
       let currentSeq = copiedData.find(seq => seq.id == id)
@@ -24,14 +65,25 @@
       return copiedData;
     })
   }
+
+  function binaryToNote(n: number) {
+    if (n === 1) return "C3";
+    return null;
+  }
+
+  function sixteenthNotesPattern(seq, i) {
+    return i;
+  }
 </script>
 
 
 <div class="sequence">
 
   <div class="steps" style="grid-template-columns: repeat({seq.steps}, 1fr">
-    {#each seq.pattern as step}
-      {#if step === 1}
+    {#each seq.pattern as step, index}
+      {#if index === currentStep}
+        <div class="step current"></div>
+      {:else if (step === 1)}
         <div class="step on"></div>
       {:else}
         <div class="step off"></div>
@@ -43,7 +95,7 @@
 
     <div class="ui-item">
       <label for="pulses">Pulses </label>
-      <input on:change={e => handleUpdateParm(e, seq.id, "pulses")}
+      <input on:change={e => handleUpdateParam(e, seq.id, "pulses")}
              name="pulses"
              type=number
              min=1
@@ -54,7 +106,7 @@
 
     <div class="ui-item">
       <label for="steps"> Steps </label>
-      <input on:change={e => handleUpdateParm(e, seq.id, "steps")}
+      <input on:change={e => handleUpdateParam(e, seq.id, "steps")}
              name="steps"
              type=number
              min={seq.pulses}
@@ -65,7 +117,7 @@
 
     <div class="ui-item">
       <label for="rotation"> Rotation </label>
-      <input on:change={e => handleUpdateParm(e, seq.id, "rotation")}
+      <input on:change={e => handleUpdateParam(e, seq.id, "rotation")}
              name="rotation"
              type=number
              min=0
@@ -111,6 +163,10 @@
 
   div.ui-item label, div.ui-item input {
     display: block;
+  }
+
+  div.current {
+    background-color: lightblue;
   }
 
   div.on {

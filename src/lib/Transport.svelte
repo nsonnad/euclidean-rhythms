@@ -3,7 +3,7 @@
 
   const handleStartClick = async() => {
     await Tone.start()
-    Tone.Transport.start();
+    Tone.Transport.start("+0.1");
   }
 </script>
 
