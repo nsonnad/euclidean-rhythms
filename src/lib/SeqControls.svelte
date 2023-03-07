@@ -15,7 +15,8 @@
     SeqStore.update(currentData => {
       let copiedData = [...currentData];
       let currentSeq = copiedData.find(seq => seq.id == id)
-      let newVal = parseInt(e.target.value);
+
+      let newVal = (param !== "sound") ? parseInt(e.target.value) : e.target.value;
 
       currentSeq[param as keyof SequenceType] = newVal;
       currentSeq.pattern = getPattern(currentSeq.pulses, currentSeq.steps)
@@ -58,6 +59,16 @@
            max={seq.steps}
            value={seq.rotation}
            >
+  </div>
+
+  <div class="ui-item">
+    <label for="sample"> Sample </label>
+    <select value={seq.sound} name="sample" on:change={e => handleUpdateParam(e, seq.id, "sound")}>
+      <option value="wood-block.mp3">wood block</option>
+      <option value="clave.mp3">clave</option>
+      <option value="hihat.ogg">hi hat</option>
+      <option value="bongo1.mp3">bongo</option>
+    </select>
   </div>
 
   <div class="ui-item">

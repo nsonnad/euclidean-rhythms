@@ -4,7 +4,7 @@
 -->
 <script lang="ts">
   import type SequenceType from '../stores/SeqenceType';
-  import type { Sequence } from 'tone';
+  import type { Sampler, Sequence } from 'tone';
 
   import { onMount, onDestroy } from 'svelte';
 
@@ -13,6 +13,7 @@
 
   let toneSeq: Sequence;
   let toneSeqSixteenth: Sequence;
+  let sampler: Sampler;
 
   let currentStep: number = -1;
   let mounted: boolean = false;
@@ -22,13 +23,13 @@
     // set up 16 note sequences on mount
     toneSeq = new Tone.Sequence({ subdivision: "16n" });
     toneSeqSixteenth = new Tone.Sequence({ subdivision: "16n" });
-
     setToneSeq(seq);
   })
 
   onDestroy(() => {
     if (toneSeq) toneSeq.dispose();
     if (toneSeqSixteenth) toneSeqSixteenth.dispose();
+    if (sampler) sampler.dispose();
   })
 
   $: if (mounted) {
@@ -36,13 +37,15 @@
   }
 
   function setToneSeq(seq: SequenceType) {
-    let synth = new Tone.Synth().toDestination();
-    synth.oscillator.type = seq.sound;
+    sampler = new Tone.Sampler({
+      urls: { C3: seq.sound },
+      baseUrl: "/samples/"
+    }).toDestination();
 
     toneSeq.set({
       events: seq.pattern.map(binaryToNote),
       callback: (time, note) => {
-        synth.triggerAttackRelease(note, 0.1, time);
+        sampler.triggerAttackRelease(note, 0.1, time);
       }
     }).start(0);
 

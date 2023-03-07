@@ -3,6 +3,7 @@ import { getPattern } from 'euclidean-rhythms';
 import type SequenceType from './SeqenceType';
 
 const synthTypes = ["sine", "triangle", "sawtooth", "square"];
+const samples = ["wood-block.mp3", "clave.mp3", "hihat.ogg", "bongo1.mp3"];
 
 function generateRandomSequence() {
   let randVals = [
@@ -17,7 +18,7 @@ function generateRandomSequence() {
     pulses: randVals[0],
     steps: randVals[1],
     rotation: 0,
-    sound: synthTypes[Math.floor(Math.random()*synthTypes.length)],
+    sound: samples[Math.floor(Math.random()*samples.length)],
     pattern: getPattern(randVals[0], randVals[1])
   }
 }
