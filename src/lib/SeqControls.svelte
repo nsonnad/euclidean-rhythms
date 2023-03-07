@@ -29,6 +29,16 @@
 <div class="seq-controls">
 
   <div class="ui-item">
+    <label for="sample"> Sample </label>
+    <select value={seq.sound} name="sample" on:change={e => handleUpdateParam(e, seq.id, "sound")}>
+      <option value="wood-block.mp3">wood block</option>
+      <option value="clave.mp3">clave</option>
+      <option value="hihat.ogg">hi hat</option>
+      <option value="bongo1.mp3">bongo</option>
+    </select>
+  </div>
+
+  <div class="ui-item">
     <label for="pulses">Pulses: {seq.pulses} / {seq.steps} </label>
     <input on:input={e => handleUpdateParam(e, seq.id, "pulses")}
            name="pulses"
@@ -59,16 +69,6 @@
            max={seq.steps}
            value={seq.rotation}
            >
-  </div>
-
-  <div class="ui-item">
-    <label for="sample"> Sample </label>
-    <select value={seq.sound} name="sample" on:change={e => handleUpdateParam(e, seq.id, "sound")}>
-      <option value="wood-block.mp3">wood block</option>
-      <option value="clave.mp3">clave</option>
-      <option value="hihat.ogg">hi hat</option>
-      <option value="bongo1.mp3">bongo</option>
-    </select>
   </div>
 
   <div class="ui-item">
