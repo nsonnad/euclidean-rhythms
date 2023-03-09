@@ -2,8 +2,19 @@
 
 TODO:
 
-- [ ] switch sound sources from synth to sample
+- [X] switch sound sources from synth to sample
 - [ ] more intentional design concept
+- [ ] more sample options
+- [ ] explanation/about popup
 - [ ] feature: upload sample
 - [ ] feature: export audio file
-- [ ] feature: sample manipulation settings via Tone
+- [ ] donation
+- [ ] global settings:
+  - [ ] bpm
+- [ ]  per-sample settings:
+  - [ ] gain
+  - [ ] pitch
+  - [ ] fx send verb/delay
+  - [ ] sample ADSR
+  - [ ] hp, lp, bp filter
+  - [ ] traditional rhythm presets

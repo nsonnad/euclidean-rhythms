@@ -2,6 +2,7 @@
   import { getPattern } from 'euclidean-rhythms';
   import { SeqStore } from '../stores/SeqStore';
   import type SequenceType from '../stores/SeqenceType';
+  import samplePaths from '../stores/samples';
 
   export let seq: SequenceType;
 
@@ -31,10 +32,9 @@
   <div class="ui-item">
     <label for="sample"> Sample </label>
     <select value={seq.sound} name="sample" on:change={e => handleUpdateParam(e, seq.id, "sound")}>
-      <option value="wood-block.mp3">wood block</option>
-      <option value="clave.mp3">clave</option>
-      <option value="hihat.ogg">hi hat</option>
-      <option value="bongo1.mp3">bongo</option>
+      {#each samplePaths as sample}
+        <option value="{sample}">{sample}</option>
+      {/each}
     </select>
   </div>
 

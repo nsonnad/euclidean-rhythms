@@ -6,7 +6,7 @@
 </script>
 
 <div class="top">
-  <h1>euclidean rhythm generator</h1>
+  <h1>euclidean rhythm generator (?)</h1>
 </div>
 
 <Transport {Tone} />
