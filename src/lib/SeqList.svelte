@@ -17,14 +17,20 @@
 </div>
 {/each}
 
-<button on:click={handleAdd}>+ add sequence</button>
+<div class="add-sequence">
+  <button on:click={handleAdd}>+ add sequence</button>
+</div>
 
 <style>
   div.sequence {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     width: 100%;
+  }
+
+  div.add-sequence {
+    text-align: center;
   }
 </style>

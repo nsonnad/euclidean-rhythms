@@ -7,5 +7,15 @@
   }
 </script>
 
-<button on:click={handleStartClick}>play</button>
-<button on:click={ () => Tone.Transport.stop() }>stop</button>
+<div class="transport">
+  <button on:click={handleStartClick}>play</button>
+  <button on:click={ () => Tone.Transport.stop() }>stop</button>
+  <button on:click={ () => Tone.Transport.stop() }>rec</button>
+</div>
+
+<style>
+  div.transport {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+</style>

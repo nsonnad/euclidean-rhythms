@@ -6,7 +6,7 @@ TODO:
 - [ ] more intentional design concept
 - [X] more sample options
 - [ ] explanation/about popup
-- [ ] feature: upload sample
+- [ ] feature: upload sample (https://akashmittal.com/upload-file-svelte/)
 - [ ] feature: export audio file
 - [ ] donation
 - [ ] global settings:
@@ -14,7 +14,9 @@ TODO:
 - [ ]  per-sample settings:
   - [X] gain
   - [X] pitch
+  - [ ] implement `rotation`
   - [ ] fx send verb/delay
+  - [ ] pan
   - [X] sample ADSR
   - [ ] hp, lp, bp filter
   - [ ] traditional rhythm presets
