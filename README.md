@@ -4,7 +4,7 @@ TODO:
 
 - [X] switch sound sources from synth to sample
 - [ ] more intentional design concept
-- [ ] more sample options
+- [X] more sample options
 - [ ] explanation/about popup
 - [ ] feature: upload sample
 - [ ] feature: export audio file
@@ -12,9 +12,9 @@ TODO:
 - [ ] global settings:
   - [ ] bpm
 - [ ]  per-sample settings:
-  - [ ] gain
-  - [ ] pitch
+  - [X] gain
+  - [X] pitch
   - [ ] fx send verb/delay
-  - [ ] sample ADSR
+  - [X] sample ADSR
   - [ ] hp, lp, bp filter
   - [ ] traditional rhythm presets

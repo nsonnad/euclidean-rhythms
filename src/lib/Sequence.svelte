@@ -4,6 +4,7 @@
 -->
 <script lang="ts">
   import type SequenceType from '../stores/SeqenceType';
+  import { Midi } from 'tone';
   import type { Sampler, Sequence } from 'tone';
 
   import { onMount, onDestroy } from 'svelte';
@@ -38,14 +39,19 @@
 
   function setToneSeq(seq: SequenceType) {
     sampler = new Tone.Sampler({
-      urls: { C3: seq.sound },
-      baseUrl: "/samples/"
+      urls: { C3: seq.sample.path },
+      baseUrl: "/samples/",
+      volume: seq.sample.volume,
+      attack: seq.sample.attack,
+      release: seq.sample.release
     }).toDestination();
+
+    let noteString = Midi(seq.sample.pitch).toNote()
 
     toneSeq.set({
       events: seq.pattern.map(binaryToNote),
       callback: (time, note) => {
-        sampler.triggerAttackRelease(note, 0.1, time);
+        sampler.triggerAttackRelease([noteString], 0.1, time);
       }
     }).start(0);
 

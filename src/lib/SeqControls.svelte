@@ -17,29 +17,28 @@
       let copiedData = [...currentData];
       let currentSeq = copiedData.find(seq => seq.id == id)
 
-      let newVal = (param !== "sound") ? parseInt(e.target.value) : e.target.value;
-
-      currentSeq[param as keyof SequenceType] = newVal;
+      currentSeq[param as keyof SequenceType] = parseInt(e.target.value);
       currentSeq.pattern = getPattern(currentSeq.pulses, currentSeq.steps)
 
       return copiedData;
     })
+  }
+
+  function handleUpdateSample(e, id: number, param: string) {
+    SeqStore.update(currentData => {
+      let copiedData = [...currentData];
+      let currentSeq = copiedData.find(seq => seq.id == id)
+
+      currentSeq.sample[param] = e.target.value;
+      return copiedData;
+    });
   }
 </script>
 
 <div class="seq-controls">
 
   <div class="ui-item">
-    <label for="sample"> Sample </label>
-    <select value={seq.sound} name="sample" on:change={e => handleUpdateParam(e, seq.id, "sound")}>
-      {#each samplePaths as sample}
-        <option value="{sample}">{sample}</option>
-      {/each}
-    </select>
-  </div>
-
-  <div class="ui-item">
-    <label for="pulses">Pulses: {seq.pulses} / {seq.steps} </label>
+    <label for="pulses">Pulses: {seq.pulses}</label>
     <input on:input={e => handleUpdateParam(e, seq.id, "pulses")}
            name="pulses"
            type=range
@@ -72,8 +71,66 @@
   </div>
 
   <div class="ui-item">
+    <label for="sample"> Sample </label>
+    <select value={seq.sample.path} name="sample" on:change={e => handleUpdateSample(e, seq.id, "path")}>
+      {#each samplePaths as sample}
+        <option value="{sample}">{sample}</option>
+      {/each}
+    </select>
+  </div>
+
+  <div class="ui-item">
+    <label for="volume"> Level </label>
+    <input on:input={e => handleUpdateSample(e, seq.id, "volume")}
+           name="volume"
+           type=range
+           min=-60
+           max=0
+           step=1
+           value={seq.sample.volume}
+           >
+  </div>
+
+  <div class="ui-item">
+    <label for="pitch"> Pitch </label>
+    <input on:input={e => handleUpdateSample(e, seq.id, "pitch")}
+           name="pitch"
+           type=range
+           min=24
+           max=72
+           step=1
+           value={seq.sample.pitch}
+           >
+  </div>
+
+  <div class="ui-item">
+    <label for="rotation"> Attack </label>
+    <input on:input={e => handleUpdateSample(e, seq.id, "attack")}
+           name="attack"
+           type=range
+           min=0
+           max=1
+           step=0.01
+           value={seq.sample.attack}
+           >
+  </div>
+
+  <div class="ui-item">
+    <label for="rotation"> Release </label>
+    <input on:input={e => handleUpdateSample(e, seq.id, "release")}
+           name="release"
+           type=range
+           min=0
+           max=1
+           step=0.01
+           value={seq.sample.release}
+           >
+  </div>
+
+  <div class="ui-item">
     <button on:click={e => handleDeleteSeq(seq.id)}>X</button>
   </div>
+
 </div>
 
 <style>
