@@ -11,6 +11,7 @@
 
   export let Tone;
   export let seq: SequenceType;
+  export let prevPath: string;
 
   let toneSeq: Sequence;
   let toneSeqSixteenth: Sequence;
@@ -21,26 +22,43 @@
 
   onMount(() => {
     mounted = true;
+    prevPath = seq.sample.path;
+
     // set up 16 note sequences on mount
     toneSeq = new Tone.Sequence({ subdivision: "16n" });
     toneSeqSixteenth = new Tone.Sequence({ subdivision: "16n" });
+
+    newSampler(seq.sample.path);
     setToneSeq(seq);
   })
 
+  // clean up Tone.Sequences and Tone.Sampler if component is deleted
   onDestroy(() => {
     if (toneSeq) toneSeq.dispose();
     if (toneSeqSixteenth) toneSeqSixteenth.dispose();
     if (sampler) sampler.dispose();
   })
 
+  // if we have a new sample file to load, destroy and create a new Tone.Sampler (this seems necessary)
+  // otherwise just `set` settings on the existing one
   $: if (mounted) {
+    if (seq.sample.path !== prevPath) {
+      sampler.dispose();
+      newSampler(seq.sample.path);
+      prevPath = seq.sample.path;
+    }
     setToneSeq(seq);
   }
 
-  function setToneSeq(seq: SequenceType) {
+  function newSampler(path: string) {
     sampler = new Tone.Sampler({
-      urls: { C3: seq.sample.path },
-      baseUrl: "/samples/",
+      urls: { C3: path },
+      baseUrl: "/samples/"
+    }).toDestination();
+  }
+
+  function setToneSeq(seq: SequenceType) {
+    sampler.set({
       volume: seq.sample.volume,
       attack: seq.sample.attack,
       release: seq.sample.release
