@@ -3,6 +3,8 @@
   Handles rendering and playback for a given sequence
 -->
 <script lang="ts">
+  import { getPattern } from 'euclidean-rhythms';
+
   import type SequenceType from '../stores/SeqenceType';
   import { Midi } from 'tone';
   import type { Sampler, Sequence } from 'tone';
@@ -50,6 +52,8 @@
     setToneSeq(seq);
   }
 
+  $: pattern = getPattern(seq.pulses, seq.steps);
+
   function newSampler(path: string) {
     sampler = new Tone.Sampler({
       urls: { C3: path },
@@ -67,14 +71,14 @@
     let noteString = Midi(seq.pitch).toNote()
 
     toneSeq.set({
-      events: seq.pattern.map(binaryToNote),
+      events: pattern.map(binaryToNote),
       callback: (time, note) => {
         sampler.triggerAttackRelease([noteString], 0.1, time);
       }
     }).start(0);
 
     toneSeqSixteenth.set({
-      events: seq.pattern.map(sixteenthNotesPattern),
+      events: pattern.map(sixteenthNotesPattern),
       callback: (time: number, note: number) => { currentStep = note; }
     }).start(0);
   }
@@ -90,7 +94,7 @@
 </script>
 
 <div class="steps" style="grid-template-columns: repeat({seq.steps}, 1fr">
-  {#each seq.pattern as step, index}
+  {#each pattern as step, index}
     {#if index === currentStep}
       <div class="step current"></div>
     {:else if (step === 1)}

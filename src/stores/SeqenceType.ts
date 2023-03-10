@@ -8,7 +8,6 @@ type SequenceType = {
   volume: number,
   attack: number,
   release: number
-  pattern: number[]
 }
 
 export default SequenceType;

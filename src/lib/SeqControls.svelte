@@ -1,11 +1,13 @@
 <script lang="ts">
-  import { getPattern } from 'euclidean-rhythms';
   import { SeqStore } from '../stores/SeqStore';
   import type SequenceType from '../stores/SeqenceType';
   import samplePaths from '../stores/samples';
+  import presets from '../stores/presets';
   import Knob from './Knob.svelte';
 
   export let seq: SequenceType;
+
+  let preset;
 
   function handleDeleteSeq(id: number) {
     SeqStore.update(currentData => {
@@ -19,8 +21,6 @@
       let currentSeq = copiedData.find(seqData => seqData.id == seq.id)
 
       currentSeq[param] = e.target.value;
-      currentSeq.pattern = getPattern(currentSeq.pulses, currentSeq.steps)
-
       return copiedData;
     })
   }
@@ -34,46 +34,16 @@
       return copiedData;
     });
   }
+
+  // TODO
+  function handlePreset(newPreset) {
+    preset = newPreset;
+  }
 </script>
 
 <div class="seq-controls">
 
-  <div class="seq-controls-sequence">
-    <div class="ui-item">
-      <label for="pulses">Pulses</label>
-      <Knob on:updateParam={handleUpdateKnob}
-             name="pulses"
-             min=1
-             step=1
-             max={seq.steps}
-             value={seq.pulses}
-             />
-    </div>
-
-    <div class="ui-item">
-      <label for="steps"> Steps</label>
-      <Knob on:updateParam={handleUpdateKnob}
-             name="steps"
-             min={seq.pulses}
-             max=16
-             step=1
-             value={seq.steps}
-             />
-    </div>
-
-    <div class="ui-item">
-      <label for="rotation"> Rotation </label>
-      <Knob on:updateParam={handleUpdateKnob}
-             name="rotation"
-             step=1
-             min=0
-             max={seq.steps}
-             value={seq.rotation}
-             />
-    </div>
-  </div>
-
-  <div class="seq-controls-sample">
+  <div class="seq-controls-sample control-board">
 
     <div class="ui-item">
       <label for="sample"> Sample </label>
@@ -129,8 +99,54 @@
     </div>
   </div>
 
+  <div class="seq-controls-sequence control-board">
+
+    <div class="ui-item">
+      <label for="sample"> Sequence </label>
+      <select value={preset} name="preset" on:change={handlePreset}>
+        {#each presets as preset}
+          <option value="{preset.name}">{preset.name}</option>
+        {/each}
+      </select>
+    </div>
+
+    <div class="ui-item">
+      <label for="pulses">Pulses</label>
+      <Knob on:updateParam={handleUpdateKnob}
+             name="pulses"
+             min=1
+             step=1
+             max={seq.steps}
+             value={seq.pulses}
+             />
+    </div>
+
+    <div class="ui-item">
+      <label for="steps"> Steps</label>
+      <Knob on:updateParam={handleUpdateKnob}
+             name="steps"
+             min={seq.pulses}
+             max=16
+             step=1
+             value={seq.steps}
+             />
+    </div>
+
+    <div class="ui-item">
+      <label for="rotation"> Rotation </label>
+      <Knob on:updateParam={handleUpdateKnob}
+             name="rotation"
+             step=1
+             min=0
+             max={seq.steps}
+             value={seq.rotation}
+             />
+    </div>
+  </div>
+
+
   <div class="ui-item">
-    <button on:click={e => handleDeleteSeq(seq.id)}>X</button>
+    <button class="delete-sequence" on:click={e => handleDeleteSeq(seq.id)}>X</button>
   </div>
 
 </div>
@@ -143,10 +159,18 @@
     flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 14px;
+    gap: 10px;
   }
 
   div.seq-controls-sequence {
     display: flex;
+  }
+
+  div.control-board {
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px #93a1a5;
   }
 
   div.seq-controls-sample {
@@ -154,21 +178,42 @@
   }
 
   div.ui-item {
+    display: flex;
+    flex-direction: column;
     padding: 0px 6px;
   }
 
-  div.ui-item label, div.ui-item input {
+  div.ui-item label {
     display: block;
+    margin-bottom: 8px;
   }
 
-  input {
-    max-width: 80px;
+  div.ui-item select {
+    width: 200px;
+    height: 40px;
     padding: 10px;
-    margin: 0;
-    box-sizing: border-box;
-    background-color: #1f1f1f;
-    color: darkgray;
-    border: 0;
+    border: none;
+    border-bottom: 1px solid #999;
+    font-size: 18px;
+    font-family: monospace;
+    color: gray;
+    background-color: black;
   }
 
+  button.delete-sequence {
+    background-color: black; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  button.delete-sequence:hover {
+    background-color: darkred;
+  }
 </style>

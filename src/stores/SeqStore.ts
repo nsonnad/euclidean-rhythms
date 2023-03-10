@@ -21,8 +21,7 @@ function generateRandomSequence() {
     pitch: 48,
     volume: -6,
     attack: 0,
-    release: 1,
-    pattern: getPattern(randVals[0], randVals[1])
+    release: 1
   }
 }
 
