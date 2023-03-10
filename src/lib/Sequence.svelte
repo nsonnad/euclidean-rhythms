@@ -52,7 +52,13 @@
     setToneSeq(seq);
   }
 
-  $: pattern = getPattern(seq.pulses, seq.steps);
+  function arrayRotate(arr, count) {
+    let len = arr.length
+    arr.push(...arr.splice(0, (-count % len + len) % len))
+    return arr;
+  }
+
+  $: pattern = arrayRotate(getPattern(seq.pulses, seq.steps), seq.rotation);
 
   function newSampler(path: string) {
     sampler = new Tone.Sampler({
