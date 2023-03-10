@@ -98,6 +98,7 @@
       <label for="volume"> Level </label>
       <Knob on:updateParam={handleUpdateKnob}
              name="volume"
+             steps=35
              min=-60
              max=10
              value={seq.sample.volume}
