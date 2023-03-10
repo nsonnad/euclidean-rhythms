@@ -22,13 +22,13 @@
 
   onMount(() => {
     mounted = true;
-    prevPath = seq.sample.path;
+    prevPath = seq.samplePath;
 
     // set up 16 note sequences on mount
     toneSeq = new Tone.Sequence({ subdivision: "16n" });
     toneSeqSixteenth = new Tone.Sequence({ subdivision: "16n" });
 
-    newSampler(seq.sample.path);
+    newSampler(seq.samplePath);
     setToneSeq(seq);
   })
 
@@ -42,10 +42,10 @@
   // if we have a new sample file to load, destroy and create a new Tone.Sampler (this seems necessary)
   // otherwise just `set` settings on the existing one
   $: if (mounted) {
-    if (seq.sample.path !== prevPath) {
+    if (seq.samplePath !== prevPath) {
       sampler.dispose();
-      newSampler(seq.sample.path);
-      prevPath = seq.sample.path;
+      newSampler(seq.samplePath);
+      prevPath = seq.samplePath;
     }
     setToneSeq(seq);
   }
@@ -59,12 +59,12 @@
 
   function setToneSeq(seq: SequenceType) {
     sampler.set({
-      volume: seq.sample.volume,
-      attack: seq.sample.attack,
-      release: seq.sample.release
+      volume: seq.volume,
+      attack: seq.attack,
+      release: seq.release
     }).toDestination();
 
-    let noteString = Midi(seq.sample.pitch).toNote()
+    let noteString = Midi(seq.pitch).toNote()
 
     toneSeq.set({
       events: seq.pattern.map(binaryToNote),

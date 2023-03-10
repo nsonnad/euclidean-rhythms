@@ -13,26 +13,16 @@
     })
   }
 
-  function handleUpdateParam(e, id: number, param: string) {
+  function handleUpdateParam(e, param) {
     SeqStore.update(currentData => {
       let copiedData = [...currentData];
-      let currentSeq = copiedData.find(seq => seq.id == id)
+      let currentSeq = copiedData.find(seqData => seqData.id == seq.id)
 
-      currentSeq[param as keyof SequenceType] = parseInt(e.target.value);
+      currentSeq[param] = e.target.value;
       currentSeq.pattern = getPattern(currentSeq.pulses, currentSeq.steps)
 
       return copiedData;
     })
-  }
-
-  function handleUpdateSample(e, id: number, param: string) {
-    SeqStore.update(currentData => {
-      let copiedData = [...currentData];
-      let currentSeq = copiedData.find(seq => seq.id == id)
-
-      currentSeq.sample[param] = e.target.value;
-      return copiedData;
-    });
   }
 
   function handleUpdateKnob(msg) {
@@ -40,7 +30,7 @@
       let copiedData = [...currentData];
       let currentSeq = copiedData.find(seqData => seqData.id == seq.id)
 
-      currentSeq.sample[msg.detail.param] = msg.detail.value;
+      currentSeq[msg.detail.param] = msg.detail.value;
       return copiedData;
     });
   }
@@ -50,36 +40,36 @@
 
   <div class="seq-controls-sequence">
     <div class="ui-item">
-      <label for="pulses">Pulses: {seq.pulses}</label>
-      <input on:input={e => handleUpdateParam(e, seq.id, "pulses")}
+      <label for="pulses">Pulses</label>
+      <Knob on:updateParam={handleUpdateKnob}
              name="pulses"
-             type=range
              min=1
+             step=1
              max={seq.steps}
              value={seq.pulses}
-             >
+             />
     </div>
 
     <div class="ui-item">
-      <label for="steps"> Steps: {seq.steps} </label>
-      <input on:input={e => handleUpdateParam(e, seq.id, "steps")}
+      <label for="steps"> Steps</label>
+      <Knob on:updateParam={handleUpdateKnob}
              name="steps"
-             type=range
              min={seq.pulses}
              max=16
+             step=1
              value={seq.steps}
-             >
+             />
     </div>
 
     <div class="ui-item">
       <label for="rotation"> Rotation </label>
-      <input on:input={e => handleUpdateParam(e, seq.id, "rotation")}
+      <Knob on:updateParam={handleUpdateKnob}
              name="rotation"
-             type=range
+             step=1
              min=0
              max={seq.steps}
              value={seq.rotation}
-             >
+             />
     </div>
   </div>
 
@@ -87,7 +77,7 @@
 
     <div class="ui-item">
       <label for="sample"> Sample </label>
-      <select value={seq.sample.path} name="sample" on:change={e => handleUpdateSample(e, seq.id, "path")}>
+      <select value={seq.samplePath} name="sample" on:change={e => handleUpdateParam(e, "samplePath")}>
         {#each samplePaths as sample}
           <option value="{sample}">{sample}</option>
         {/each}
@@ -98,47 +88,44 @@
       <label for="volume"> Level </label>
       <Knob on:updateParam={handleUpdateKnob}
              name="volume"
-             steps=35
+             step=2
              min=-60
              max=10
-             value={seq.sample.volume}
+             value={seq.volume}
              />
     </div>
 
     <div class="ui-item">
       <label for="pitch"> Pitch </label>
-      <input on:input={e => handleUpdateSample(e, seq.id, "pitch")}
+      <Knob on:updateParam={handleUpdateKnob}
              name="pitch"
-             type=range
+             step=1
              min=24
              max=72
-             step=1
-             value={seq.sample.pitch}
-             >
+             value={seq.pitch}
+             />
     </div>
 
     <div class="ui-item">
       <label for="rotation"> Attack </label>
-      <input on:input={e => handleUpdateSample(e, seq.id, "attack")}
+      <Knob on:updateParam={handleUpdateKnob}
              name="attack"
-             type=range
              min=0
              max=1
              step=0.01
-             value={seq.sample.attack}
-             >
+             value={seq.attack}
+             />
     </div>
 
     <div class="ui-item">
       <label for="rotation"> Release </label>
-      <input on:input={e => handleUpdateSample(e, seq.id, "release")}
+      <Knob on:updateParam={handleUpdateKnob}
              name="release"
-             type=range
              min=0
              max=1
              step=0.01
-             value={seq.sample.release}
-             >
+             value={seq.release}
+             />
     </div>
   </div>
 
@@ -167,7 +154,6 @@
   }
 
   div.ui-item {
-    flex-direction: row;
     padding: 0px 6px;
   }
 

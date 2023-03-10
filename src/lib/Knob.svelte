@@ -4,7 +4,7 @@
 
 	const dispatch = createEventDispatcher();
 
-	export let value, min, max, name, steps;
+	export let value, min, max, name, step;
 	export let rotRange = 2 * Math.PI * 0.83;
 	export let pixelRange = 200;
 	export let startRotation = -Math.PI * 0.83;
@@ -12,7 +12,7 @@
 	let startY, startValue;
 	$: valueRange = max - min;
 	$: rotation = startRotation + (value - min) / valueRange * rotRange;
-	$: stepSize = valueRange / steps;
+	$: roundedVal = +parseFloat(value.toFixed(2));
 
 	// prevent draggin from selecting text
 	function unFocus() {
@@ -31,8 +31,7 @@
 		unFocus();
 		const valueDiff = valueRange * (clientY - startY) / pixelRange;
 		let newValue = clamp(startValue - valueDiff, min, max)
-		let normalizedValue = closestNumber(newValue, stepSize);
-		console.log(normalizedValue);
+		let normalizedValue = closestNumber(newValue, step);
 
 		dispatch('updateParam', {
 			param: name,
@@ -76,17 +75,25 @@
 	}
 </script>
 
-<div class="knob" style="--rotation: {rotation}" on:pointerdown={pointerDown}>
-  <div class="knob-inner"></div>
+<div class="knob-container">
+	<div class="knob" style="--rotation: {rotation}" on:pointerdown={pointerDown}>
+		<div class="knob-inner"></div>
+	</div>
+	<div class="value-display"> {roundedVal} </div>
 </div>
 
 <style>
+.knob-container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
 
 .knob {
 	position: relative;
 	display: block;
-	min-width: 50px;
-	min-height: 50px;
+	width: 40px;
+	height: 40px;
 	padding: 0;
 	border-radius: 50%;
 	border: 1px solid white;
@@ -101,6 +108,10 @@
 	left: 50%;
 	background-color: white;
 	transform: translate(-50%, -50%) rotate(calc(var(--rotation) * 1rad)) translate(0, -50%);
+}
+
+.value-display {
+	text-align: center;
 }
 </style>
 

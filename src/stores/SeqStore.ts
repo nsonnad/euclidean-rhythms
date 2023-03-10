@@ -17,13 +17,11 @@ function generateRandomSequence() {
     pulses: randVals[0],
     steps: randVals[1],
     rotation: 0,
-    sample: {
-      path: samplePaths[Math.floor(Math.random()*samplePaths.length)],
-      pitch: 48,
-      volume: -6,
-      attack: 0,
-      release: 1
-    },
+    samplePath: samplePaths[Math.floor(Math.random()*samplePaths.length)],
+    pitch: 48,
+    volume: -6,
+    attack: 0,
+    release: 1,
     pattern: getPattern(randVals[0], randVals[1])
   }
 }
