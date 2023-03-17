@@ -10,8 +10,10 @@ TODO:
 - [ ] feature: export audio file
 - [ ] donation
 - [ ] solo/mute (w hotkeys??)
+- [ ] mobile
 - [ ] global settings:
   - [ ] bpm
+  - [ ] undo?
 - [ ]  per-sample settings:
   - [X] gain
   - [X] pitch
@@ -21,3 +23,5 @@ TODO:
   - [X] sample ADSR
   - [ ] hp, lp, bp filter
   - [/] traditional rhythm presets
+  - [ ] randomizer
+  - [ ] lfo

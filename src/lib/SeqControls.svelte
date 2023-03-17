@@ -167,10 +167,10 @@
   }
 
   div.control-board {
-    border: 1px solid white;
+    border: 1px solid var(--seq-color);
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 2px 2px #93a1a5;
+    box-shadow: 2px 2px var(--seq-color);
   }
 
   div.seq-controls-sample {

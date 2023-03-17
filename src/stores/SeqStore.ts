@@ -1,5 +1,4 @@
 import { writable } from "svelte/store";
-import { getPattern } from 'euclidean-rhythms';
 import samplePaths from './samples';
 
 import type SequenceType from './SeqenceType';

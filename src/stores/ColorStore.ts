@@ -8,14 +8,14 @@ let colors = [
 
 function getNextColor() {
 	let nextColor = colors.shift()
-  return nextColor;
+	return nextColor;
 }
 
 function putColorBack(color: string) {
 	colors.push(color);
 }
 
-export default {
+export const ColorStore =  {
 	getNextColor: getNextColor,
 	putColorBack: putColorBack
 }
