@@ -1,5 +1,10 @@
 # Euclidean rhythm generator
 
+A web-based tool to generate [Euclidean
+Rhythms](https://en.wikipedia.org/wiki/Euclidean_rhythm) from samples and export
+to audio for use in your music productions. A work in progress. Made with
+Svelte and Tone.js.
+
 TODO:
 
 - [X] switch sound sources from synth to sample
