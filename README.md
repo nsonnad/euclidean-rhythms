@@ -19,7 +19,7 @@ TODO:
 - [ ] mobile design
 - [ ] allow typing in knob values
 - [X] global bpm
-- [ ] swing
+- [X] swing
 - [ ] undo?
 - [ ] perf: prevent playback stoppage while adjusting parameters
 - [X] gain
