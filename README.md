@@ -11,25 +11,20 @@ TODO:
 - [/] more intentional design concept
 - [X] more sample options
 - [ ] explanation/about popup
-- [ ] feature: upload sample (https://akashmittal.com/upload-file-svelte/)
+- [ ] feature: upload custom sample (https://akashmittal.com/upload-file-svelte/)
 - [ ] feature: record and export audio file
 - [ ] donation
+- [ ] add more samples
 - [X] mute
-- [ ] mobile
-- [ ] allow typing in value
-- [ ] global settings:
-  - [X] bpm
-  - [ ] undo?
-- [ ] performance
-  - [ ] continue playing while adjusting parameter
-- [ ] per-sample settings:
-  - [X] gain
-  - [X] pitch
-  - [X] implement `rotation`
-  - [ ] fx send verb/delay
-  - [ ] pan
-  - [X] sample ADSR
-  - [ ] hp, lp, bp filter
-  - [/] traditional rhythm presets
-  - [ ] randomizer
-  - [ ] lfo
+- [ ] mobile design
+- [ ] allow typing in knob values
+- [X] global bpm
+- [ ] undo?
+- [ ] perf: prevent playback stoppage while adjusting parameters
+- [X] gain
+- [X] pitch
+- [X] implement `rotation`
+- [X] pan
+- [/] sample ADSR (got AR, any way to get DS?)
+- [/] traditional rhythm presets
+- [ ] sequence randomizer
