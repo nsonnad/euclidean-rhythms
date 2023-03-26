@@ -1,13 +1,15 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
+
   import { SeqStore } from '../stores/SeqStore';
   import type SequenceType from '../stores/SeqenceType';
   import samplePaths from '../stores/samples';
   import presets from '../stores/presets';
   import Knob from './Knob.svelte';
-  import SampleBrowser from './SampleBrowser.svelte';
 
   export let seq: SequenceType;
 
+	const dispatch = createEventDispatcher();
   let preset;
 
   function handleDeleteSeq(id: number) {
@@ -46,6 +48,13 @@
     });
   }
 
+  function handleLoadBrowser(path, id) {
+    dispatch('loadbrowser', {
+      seqId: id,
+      samplePath: path
+    })
+  }
+
   // TODO
   function handlePreset(newPreset) {
     preset = newPreset;
@@ -57,7 +66,9 @@
   <div class="seq-controls-sample control-board">
 
     <div class="ui-item">
-      <button>LOAD SAMPLE BROWSER</button>
+      <span><strong>sample</strong></span>
+      <label for="loadbrowser">{seq.samplePath}</label>
+      <button name="loadbrowser" on:click={() => { handleLoadBrowser(seq.samplePath, seq.id)}}>BROWSE</button>
     </div>
 
     <div class="ui-item">
@@ -170,8 +181,6 @@
       <button class="mute-sequence ui-button" on:click={e => handleToggleMute(seq.id)}>M</button>
     {/if}
   </div>
-
-  <SampleBrowser seqId={seq.id} samplePath={seq.samplePath} />
 
 </div>
 
