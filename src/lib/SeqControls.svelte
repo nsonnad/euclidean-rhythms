@@ -4,6 +4,7 @@
   import samplePaths from '../stores/samples';
   import presets from '../stores/presets';
   import Knob from './Knob.svelte';
+  import SampleBrowser from './SampleBrowser.svelte';
 
   export let seq: SequenceType;
 
@@ -56,12 +57,7 @@
   <div class="seq-controls-sample control-board">
 
     <div class="ui-item">
-      <label for="sample"> Sample </label>
-      <select value={seq.samplePath} name="sample" on:change={e => handleUpdateParam(e, "samplePath")}>
-        {#each samplePaths as sample}
-          <option value="{sample}">{sample}</option>
-        {/each}
-      </select>
+      <button>LOAD SAMPLE BROWSER</button>
     </div>
 
     <div class="ui-item">
@@ -174,6 +170,8 @@
       <button class="mute-sequence ui-button" on:click={e => handleToggleMute(seq.id)}>M</button>
     {/if}
   </div>
+
+  <SampleBrowser seqId={seq.id} samplePath={seq.samplePath} />
 
 </div>
 
