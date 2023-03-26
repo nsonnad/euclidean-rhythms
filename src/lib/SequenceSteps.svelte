@@ -21,6 +21,7 @@
 
   let currentStep: number = -1;
   let mounted: boolean = false;
+  let panvol;
 
   onMount(() => {
     mounted = true;
@@ -29,6 +30,11 @@
     // set up 16 note sequences on mount
     toneSeq = new Tone.Sequence({ subdivision: "16n" });
     toneSeqSixteenth = new Tone.Sequence({ subdivision: "16n" });
+    panvol = new Tone.PanVol({
+        volume: seq.volume,
+        mute: seq.mute,
+        pan: seq.pan
+      }).toDestination();
 
     newSampler(seq.samplePath);
     setToneSeq(seq);
@@ -52,7 +58,7 @@
     setToneSeq(seq);
   }
 
-  function arrayRotate(arr, count) {
+  function arrayRotate(arr: [], count: number) {
     let len = arr.length
     arr.push(...arr.splice(0, (-count % len + len) % len))
     return arr;
@@ -64,15 +70,20 @@
     sampler = new Tone.Sampler({
       urls: { C3: path },
       baseUrl: "/samples/"
-    }).toDestination();
+    }).connect(panvol)
   }
 
   function setToneSeq(seq: SequenceType) {
-    sampler.set({
+    panvol.set({
       volume: seq.volume,
+      mute: seq.mute,
+      pan: seq.pan
+    })
+
+    sampler.set({
       attack: seq.attack,
       release: seq.release
-    }).toDestination();
+    }).connect(panvol);
 
     let noteString = Midi(seq.pitch).toNote()
 

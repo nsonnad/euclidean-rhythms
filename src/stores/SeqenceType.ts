@@ -6,8 +6,10 @@ type SequenceType = {
   samplePath: string,
   pitch: number,
   volume: number,
+  pan: number,
   attack: number,
-  release: number
+  release: number,
+  mute: boolean
 }
 
 export default SequenceType;

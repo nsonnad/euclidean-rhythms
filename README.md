@@ -14,11 +14,11 @@ TODO:
 - [ ] feature: upload sample (https://akashmittal.com/upload-file-svelte/)
 - [ ] feature: record and export audio file
 - [ ] donation
-- [ ] solo/mute (w hotkeys??)
+- [X] mute
 - [ ] mobile
 - [ ] allow typing in value
 - [ ] global settings:
-  - [ ] bpm
+  - [X] bpm
   - [ ] undo?
 - [ ] performance
   - [ ] continue playing while adjusting parameter

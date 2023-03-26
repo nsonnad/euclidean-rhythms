@@ -15,6 +15,16 @@
     })
   }
 
+  function handleToggleMute(id: number) {
+    SeqStore.update(currentData => {
+      let copiedData = [...currentData];
+      let currentSeq = copiedData.find(seqData => seqData.id == seq.id)
+
+      currentSeq.mute = !currentSeq.mute
+      return copiedData;
+    })
+  }
+
   function handleUpdateParam(e, param) {
     SeqStore.update(currentData => {
       let copiedData = [...currentData];
@@ -73,6 +83,17 @@
              min=24
              max=72
              value={seq.pitch}
+             />
+    </div>
+
+    <div class="ui-item">
+      <label for="pan"> Pan </label>
+      <Knob on:updateParam={handleUpdateKnob}
+             name="pan"
+             step=0.01
+             min=-1
+             max=1
+             value={seq.pan}
              />
     </div>
 
@@ -146,7 +167,12 @@
 
 
   <div class="ui-item">
-    <button class="delete-sequence" on:click={e => handleDeleteSeq(seq.id)}>X</button>
+    <button class="delete-sequence ui-button" on:click={e => handleDeleteSeq(seq.id)}>X</button>
+    {#if seq.mute}
+      <button class="mute-sequence ui-button muted" on:click={e => handleToggleMute(seq.id)}>M</button>
+    {:else}
+      <button class="mute-sequence ui-button" on:click={e => handleToggleMute(seq.id)}>M</button>
+    {/if}
   </div>
 
 </div>
@@ -200,7 +226,7 @@
     background-color: black;
   }
 
-  button.delete-sequence {
+  button.ui-button {
     background-color: black; /* Green */
     border: none;
     color: white;
@@ -215,5 +241,13 @@
 
   button.delete-sequence:hover {
     background-color: darkred;
+  }
+
+  button.mute-sequence:hover {
+    background-color: goldenrod;
+  }
+
+  button.muted {
+    background-color: goldenrod;
   }
 </style>

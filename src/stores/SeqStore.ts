@@ -19,8 +19,10 @@ function generateRandomSequence() {
     samplePath: samplePaths[Math.floor(Math.random()*samplePaths.length)],
     pitch: 48,
     volume: -6,
+    pan: 0,
     attack: 0,
-    release: 1
+    release: 1,
+    mute: false
   }
 }
 
