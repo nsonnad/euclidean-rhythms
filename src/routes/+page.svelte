@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as Tone from "tone";
   import SeqList from "$lib/SeqList.svelte";
-  import Transport from "$lib/Transport.svelte";
+  import GlobalControls from "$lib/GlobalControls.svelte";
 
 </script>
 
@@ -9,7 +9,7 @@
   <h1>euclidean rhythm generator (?)</h1>
 </div>
 
-<Transport {Tone} />
+<GlobalControls {Tone} />
 
 <div>
   <SeqList {Tone} />

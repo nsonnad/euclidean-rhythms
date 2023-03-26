@@ -12,14 +12,17 @@ TODO:
 - [X] more sample options
 - [ ] explanation/about popup
 - [ ] feature: upload sample (https://akashmittal.com/upload-file-svelte/)
-- [ ] feature: export audio file
+- [ ] feature: record and export audio file
 - [ ] donation
 - [ ] solo/mute (w hotkeys??)
 - [ ] mobile
+- [ ] allow typing in value
 - [ ] global settings:
   - [ ] bpm
   - [ ] undo?
-- [ ]  per-sample settings:
+- [ ] performance
+  - [ ] continue playing while adjusting parameter
+- [ ] per-sample settings:
   - [X] gain
   - [X] pitch
   - [X] implement `rotation`
