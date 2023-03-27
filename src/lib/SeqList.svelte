@@ -33,17 +33,11 @@
 </div>
 
 {#if showSampleBrowser}
-  <SampleBrowser {seqId} {samplePath} />
-  <button class="close-browser" on:click={closeSampleBrowser}>CLOSE</button>
+  <SampleBrowser {closeSampleBrowser} {seqId} {samplePath} />
 {/if}
 
 <style>
   div.add-sequence {
     text-align: center;
-  }
-
-  button.close-browser {
-    position: absolute;
-    z-index: 1000;
   }
 </style>
