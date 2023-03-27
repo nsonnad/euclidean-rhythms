@@ -8,6 +8,7 @@
   let seqId = "";
   let samplePath = "";
   let showSampleBrowser = false;
+  let numSeqs: number;
 
   function handleAdd() {
     SeqStore.newRandomSequence();
@@ -22,15 +23,21 @@
   function closeSampleBrowser() {
     showSampleBrowser = false;
   }
+
+  SeqStore.subscribe(seqs => {
+    numSeqs = seqs.length;
+  })
 </script>
 
 {#each $SeqStore as seq (seq.id)}
   <Sequence on:loadbrowser={handleLoadBrowser} {seq} {Tone} />
 {/each}
 
+{#if (numSeqs < 6) }
 <div class="add-sequence">
   <button on:click={handleAdd}>+ add sequence</button>
 </div>
+{/if}
 
 {#if showSampleBrowser}
   <SampleBrowser {closeSampleBrowser} {seqId} {samplePath} />

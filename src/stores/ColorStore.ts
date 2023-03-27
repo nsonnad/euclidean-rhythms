@@ -3,7 +3,8 @@ let colors = [
 	"#7a5dda",
 	"#5dda61",
 	"#c82d2d",
-	"#4087d4"
+	"#4087d4",
+	"#ba00c7"
 ]
 
 function getNextColor() {
