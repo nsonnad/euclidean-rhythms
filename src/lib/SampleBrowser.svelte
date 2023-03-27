@@ -93,7 +93,7 @@
       {/each}
     </div>
     <div class="browser-pane sample-controls">
-      <button on:click={handleLoadSample}>L O A D</button>
+      <button class="load-sample" on:click={handleLoadSample}>LOAD SAMPLE</button>
     </div>
   </div>
   <button class="close-browser" on:click={closeSampleBrowser}> X </button>
@@ -127,7 +127,6 @@
   .browser-pane {
     border: 1px solid violet;
     flex-grow: 1;
-    height: 100%;
     overflow: auto;
     padding: 14px;
   }
@@ -153,5 +152,23 @@
     font-size: 20px;
     right: -0.5%;
     top: -0.5%;
+  }
+
+  div.sample-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  button.load-sample {
+    cursor: pointer;
+    background-color: violet; /* Green */
+    border: none;
+    color: white;
+    font-size: 26px;
+    font-weight: bold;
+    width: 100%;
+    height: 50%;
+    border-radius: 4px;
   }
 </style>

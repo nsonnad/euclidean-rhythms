@@ -66,9 +66,8 @@
   <div class="seq-controls-sample control-board">
 
     <div class="ui-item">
-      <span><strong>sample</strong></span>
-      <label for="loadbrowser">{seq.samplePath}</label>
-      <button name="loadbrowser" on:click={() => { handleLoadBrowser(seq.samplePath, seq.id)}}>BROWSE</button>
+      <label>Sample</label>
+      <button class="ui-button sample-browse" on:click={() => { handleLoadBrowser(seq.samplePath, seq.id)}}>{seq.samplePath}</button>
     </div>
 
     <div class="ui-item">
@@ -243,7 +242,7 @@
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 2px;
   }
 
   button.delete-sequence:hover {
@@ -252,6 +251,14 @@
 
   button.mute-sequence:hover {
     background-color: goldenrod;
+  }
+
+  button.sample-browse {
+    border-bottom: 2px solid gray;
+  }
+
+  button.sample-browse:hover {
+    background-color: var(--seq-color);
   }
 
   button.muted {
