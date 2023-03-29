@@ -27,6 +27,7 @@ TODO:
 - [X] implement `rotation`
 - [X] pan
 - [/] traditional rhythm presets
+- [ ] round of design tweaks
 - [ ] sequence randomizer
 - [ ] refactor
 
