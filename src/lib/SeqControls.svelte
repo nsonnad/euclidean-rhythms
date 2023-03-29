@@ -4,12 +4,12 @@
   import { SeqStore } from '../stores/SeqStore';
   import type SequenceType from '../stores/SeqenceType';
   import samplePaths from '../stores/samples';
-  import presets from '../stores/presets';
   import Knob from './Knob.svelte';
 
   export let seq: SequenceType;
 
-	const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
+
   let preset;
 
   function handleDeleteSeq(id: number) {
@@ -48,10 +48,16 @@
     });
   }
 
-  function handleLoadBrowser(path, id) {
-    dispatch('loadbrowser', {
+  function handleSampleBrowser(path, id) {
+    dispatch('samplebrowser', {
       seqId: id,
       samplePath: path
+    })
+  }
+
+  function handlePresetBrowser(id) {
+    dispatch('presetbrowser', {
+      seqId: id
     })
   }
 
@@ -67,7 +73,7 @@
 
     <div class="ui-item">
       <label>Sample</label>
-      <button class="ui-button sample-browse" on:click={() => { handleLoadBrowser(seq.samplePath, seq.id)}}>{seq.samplePath}</button>
+      <button class="ui-button sample-browse" on:click={() => { handleSampleBrowser(seq.samplePath, seq.id)}}>{seq.samplePath}</button>
     </div>
 
     <div class="ui-item">
@@ -130,11 +136,7 @@
 
     <div class="ui-item">
       <label for="sample"> Sequence </label>
-      <select value={preset} name="preset" on:change={handlePreset}>
-        {#each presets as preset}
-          <option value="{preset.name}">{preset.name}</option>
-        {/each}
-      </select>
+      <button class="ui-button preset-browse" on:click={() => { handlePresetBrowser(seq.id) }}>LOAD PRESET</button>
     </div>
 
     <div class="ui-item">
@@ -253,11 +255,11 @@
     background-color: goldenrod;
   }
 
-  button.sample-browse {
+  button.sample-browse, button.preset-browse {
     border-bottom: 2px solid gray;
   }
 
-  button.sample-browse:hover {
+  button.sample-browse:hover, button.preset-browse:hover {
     background-color: var(--seq-color);
   }
 

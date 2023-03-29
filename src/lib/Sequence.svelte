@@ -15,7 +15,7 @@
 </script>
 
 <div class="sequence" style="--seq-color: {color}">
-	<SeqControls on:loadbrowser {seq} />
+	<SeqControls on:presetbrowser on:samplebrowser {seq} />
 	<SequenceSteps {seq} {Tone} />
 </div>
 

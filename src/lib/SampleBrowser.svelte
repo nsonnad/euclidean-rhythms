@@ -86,9 +86,7 @@
             on:click={() => handleFileClick(file)}>{file}</button
           >
         {:else}
-          <button class="browser-list" on:click={() => handleFileClick(file)}
-            >{file}</button
-          >
+          <button class="browser-list" on:click={() => handleFileClick(file)}>{file}</button>
         {/if}
       {/each}
     </div>
