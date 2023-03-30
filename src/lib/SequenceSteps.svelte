@@ -18,6 +18,7 @@
   let toneSeq: Sequence;
   let toneSeqSixteenth: Sequence;
   let sampler: Sampler;
+  let pattern: [] = [];
 
   let currentStep: number = -1;
   let mounted: boolean = false;
@@ -64,8 +65,6 @@
     return arr;
   }
 
-  $: pattern = arrayRotate(getPattern(seq.pulses, seq.steps), seq.rotation);
-
   function newSampler(path: string) {
     sampler = new Tone.Sampler({
       urls: { C3: path },
@@ -74,6 +73,9 @@
   }
 
   function setToneSeq(seq: SequenceType) {
+
+    pattern = arrayRotate(getPattern(seq.pulses, seq.steps), seq.rotation);
+
     panvol.set({
       volume: seq.volume,
       mute: seq.mute,
