@@ -10,6 +10,7 @@
 	export let startRotation = -Math.PI * 0.83;
 
 	let startY, startValue;
+	let activeKnob = false;
 	$: valueRange = max - min;
 	$: rotation = startRotation + (value - min) / valueRange * rotRange;
 	$: roundedVal = +parseFloat(value.toFixed(2));
@@ -63,6 +64,15 @@
 	}
 
 	function pointerDown({ clientY }) {
+		let currentKnobContainer = this.parentNode;
+		activeKnob = true;
+
+		document.addEventListener('pointerdown', e => {
+			if (!currentKnobContainer.contains(e.target)) {
+				activeKnob = false;
+			}
+		})
+
 		startY = clientY;
 		startValue = value;
 		window.addEventListener('pointermove', pointerMove);
@@ -73,45 +83,88 @@
 		window.removeEventListener('pointermove', pointerMove);
 		window.removeEventListener('pointerup', pointerUp);
 	}
+
+	function handleKnobInput(e) {
+		let inputVal = e.target.value
+
+		if (isNaN(inputVal)) return;
+
+		let numWithinRange = Math.min(Math.max(inputVal, min), max);
+
+		dispatch('updateParam', {
+			param: name,
+			value: closestNumber(numWithinRange, step)
+		});
+
+	}
 </script>
 
-<div class="knob-container">
-	<div class="knob" style="--rotation: {rotation}" on:pointerdown={pointerDown}>
+<div class="knob-container" >
+	<div class="knob" class:active={activeKnob} style="--rotation: {rotation}" on:pointerdown={pointerDown}>
 		<div class="knob-inner"></div>
 	</div>
-	<div class="value-display"> {roundedVal} </div>
+
+	{#if activeKnob}
+		<input type="number" size="4" min={min} max={max} value={roundedVal} on:input={handleKnobInput}>
+	{:else}
+		<div class="value-display"> {roundedVal} </div>
+	{/if}
 </div>
 
 <style>
-.knob-container {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-}
+	.knob-container {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+	}
 
-.knob {
-	position: relative;
-	display: block;
-	width: 40px;
-	height: 40px;
-	padding: 0;
-	border-radius: 50%;
-	border: 1px solid white;
-	/** transform-origin: 50% 50%; **/
-}
+	.knob {
+		position: relative;
+		display: block;
+		width: 40px;
+		height: 40px;
+		padding: 0;
+		border-radius: 50%;
+		border: 1px solid white;
+		/** transform-origin: 50% 50%; **/
+	}
 
-.knob-inner {
-	height: 50%;
-	width: 4%;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	background-color: white;
-	transform: translate(-50%, -50%) rotate(calc(var(--rotation) * 1rad)) translate(0, -50%);
-}
+	.active {
+		border: 1px solid violet;
+	}
 
-.value-display {
-	text-align: center;
-}
+	.knob-inner {
+		height: 50%;
+		width: 4%;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		background-color: white;
+		transform: translate(-50%, -50%) rotate(calc(var(--rotation) * 1rad)) translate(0, -50%);
+	}
+
+	.value-display {
+		text-align: center;
+	}
+
+	.knob-container input {
+		border: none;
+		border-bottom: 1px solid violet;
+		width: fit-content;
+		text-align: center;
+		background-color: rgb(31, 31, 31);
+		color: white;
+		font-family: monospace;
+	}
+
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	input[type=number] {
+		-moz-appearance: textfield;
+	}
 </style>
 

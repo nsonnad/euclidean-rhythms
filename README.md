@@ -18,7 +18,7 @@ TODO:
 - [X] add more samples
 - [X] mute
 - [ ] mobile design
-- [ ] allow typing in knob values
+- [X] allow typing in knob values
 - [X] global bpm
 - [X] swing
 - [ ] perf: prevent playback stoppage while adjusting parameters
@@ -26,7 +26,7 @@ TODO:
 - [X] pitch
 - [X] implement `rotation`
 - [X] pan
-- [/] traditional rhythm presets
+- [X] traditional rhythm presets
 - [ ] round of design tweaks
 - [ ] sequence randomizer
 - [ ] refactor

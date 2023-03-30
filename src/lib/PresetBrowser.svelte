@@ -19,7 +19,7 @@
 </script>
 
 <div class="preset-browser">
-  <h2>PRESET BROWSER</h2>
+  <h2>RHYTHM PRESETS</h2>
 		{#each presets as preset}
 			<div class="preset-item">
 				<button class="preset-btn" on:click={() => handlePreset(preset)}>
@@ -51,7 +51,23 @@
     border: 1px solid violet;
     overflow: scroll;
 		text-align: center;
+		padding: 20px;
   }
+
+	div.preset-item {
+		margin-bottom: 20px;
+		border-bottom: 1px solid #454545;
+	}
+
+	h2 {
+		margin-bottom: 30px;
+	}
+
+	div.preset-item p {
+		max-width: 90%;
+		margin-left: auto;
+		margin-right: auto;
+	}
 
 	button.preset-btn {
     background-color: black; /* Green */
