@@ -14,6 +14,7 @@ TODO:
 - [X] more sample options
 - [ ] explanation/about popup
 - [ ] feature: record and export audio file
+- [ ] play/stop/rec icons
 - [ ] donation
 - [X] add more samples
 - [X] mute
