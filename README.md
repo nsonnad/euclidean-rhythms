@@ -9,31 +9,35 @@ TODO:
 
 ### mvp:
 
+- [ ] explanation/about popup
+- [ ] sequence randomizer
+- [ ] code cleanup / refactor
+- [ ] use number keys to toggle mutes
+- [ ] mobile design
+- [ ] donation
+- [ ] perf: prevent playback stoppage while adjusting parameters
 - [X] switch sound sources from synth to sample
 - [X] more intentional design concept
 - [X] more sample options
-- [ ] explanation/about popup
-- [ ] feature: record and export audio file
-- [ ] play/stop/rec icons
-- [ ] donation
 - [X] add more samples
+- [X] play/stop/rec icons
 - [X] mute
-- [ ] mobile design
 - [X] allow typing in knob values
 - [X] global bpm
 - [X] swing
-- [ ] perf: prevent playback stoppage while adjusting parameters
 - [X] gain
 - [X] pitch
 - [X] implement `rotation`
 - [X] pan
 - [X] traditional rhythm presets
-- [ ] round of design tweaks
-- [ ] sequence randomizer
-- [ ] refactor
+- [X] round of design tweaks
 
 ### later:
 
 - [ ] feature: upload custom sample (https://akashmittal.com/upload-file-svelte/)
 - [/] sample ADSR (got AR, any way to get DS?)
 - [ ] undo?
+
+### wont do:
+
+- [ ] feature: record and export audio file (no need to recreate this i feel: https://help.ableton.com/hc/en-us/articles/360010526359-How-to-route-audio-between-applications)

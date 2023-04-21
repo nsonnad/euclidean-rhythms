@@ -69,5 +69,17 @@
 <style>
   div.add-sequence {
     text-align: center;
+    margin-bottom: 100px;
+  }
+
+  button {
+    background-color: black;
+    cursor: pointer;
+    border-radius: 2px;
+    border: 2px solid gray;
+    color: white;
+    font-family: monospace;
+    font-size: 1.2rem;
+    padding: 10px 20px;
   }
 </style>
