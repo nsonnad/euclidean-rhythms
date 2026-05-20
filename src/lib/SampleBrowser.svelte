@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Sampler } from "tone";
   import { SeqStore } from "../stores/SeqStore";
+  import { clickOutside } from "../util/util";
   import samplePaths from "../stores/samples";
 
   export let samplePath;
@@ -59,7 +60,7 @@
   }
 </script>
 
-<div class="sample-browser">
+<div class="sample-browser" use:clickOutside={closeSampleBrowser}>
   <h2>SAMPLE BROWSER</h2>
   <div class="browser-panes">
     <div class="browser-pane sample-dirs">
