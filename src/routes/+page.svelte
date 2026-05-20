@@ -4,7 +4,7 @@
   import GlobalControls from "$lib/GlobalControls.svelte";
 
   import UserManual from "$lib/UserManual.svelte";
-  let showUserManual = true;
+  let showUserManual = false;
 
   function toggleUserManual() {
     showUserManual = !showUserManual;
