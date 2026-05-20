@@ -46,13 +46,18 @@
   <ul>
     <li>
       Sample: Which sample is being used. Click the current sample to open the
-      sample browser.
+      sample browser. In the browser, click on a sample to hear what it sounds
+      like, and click "LOAD SAMPLE" to swap out the current sample.
     </li>
     <li>Sample level (volume), pitch, pan, attack, and release</li>
     <li>
       Sequence: Number of pulses and steps as described above, and the
-      "rotation" i.e. starting point of the first pulse. Click "LOAD PRESET" to
-      open the Eucldiean sequence preset browser.
+      "rotation" i.e. starting point of the first pulse.
+    </li>
+    <li>
+      Click "LOAD PRESET" to open the Eucldiean sequence preset browser which
+      includes brief explanations of traditional folk rhythms. Click on any of
+      the number combinations to load that preset to the current sequence.
     </li>
   </ul>
 
