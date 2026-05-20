@@ -59,6 +59,7 @@
       includes brief explanations of traditional folk rhythms. Click on any of
       the number combinations to load that preset to the current sequence.
     </li>
+    <li>Each sequence can be muted by clicking its M button on the right.</li>
   </ul>
 
   <h3>recording audio output</h3>
