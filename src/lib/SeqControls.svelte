@@ -250,7 +250,7 @@
 
   button.sample-browse, button.preset-browse {
     border-bottom: 2px solid gray;
-    max-width: 150px;
+    max-width: 120px;
     overflow-x: hidden;
   }
 
