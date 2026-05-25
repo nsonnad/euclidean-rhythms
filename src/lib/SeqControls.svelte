@@ -69,6 +69,7 @@
 
 <div class="seq-controls">
 
+
   <div class="seq-controls-sample control-board">
 
     <div class="ui-item">
@@ -136,7 +137,7 @@
 
     <div class="ui-item">
       <label for="sample"> Sequence </label>
-      <button class="ui-button preset-browse" on:click={() => { handlePresetBrowser(seq.id) }}>LOAD PRESET</button>
+      <button class="ui-button preset-browse" on:click={() => { handlePresetBrowser(seq.id) }}>PRESETS</button>
     </div>
 
     <div class="ui-item">
@@ -173,7 +174,6 @@
     </div>
   </div>
 
-
   <div class="ui-item delete-mute">
     <button class="delete-sequence ui-button" on:click={e => handleDeleteSeq(seq.id)}>X</button>
     {#if seq.mute}
@@ -182,6 +182,7 @@
       <button class="mute-sequence ui-button" on:click={e => handleToggleMute(seq.id)}>M</button>
     {/if}
   </div>
+
 
 </div>
 
@@ -192,6 +193,7 @@
     flex-grow: 1;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 0.5rem;
     margin-bottom: 14px;
   }
 
@@ -214,6 +216,10 @@
     display: flex;
     flex-direction: column;
     padding: 0px 6px;
+  }
+
+  div.delete-mute {
+    margin-left: -0.5rem;
   }
 
   div.ui-item label {
@@ -244,6 +250,8 @@
 
   button.sample-browse, button.preset-browse {
     border-bottom: 2px solid gray;
+    max-width: 150px;
+    overflow-x: hidden;
   }
 
   button.sample-browse:hover, button.preset-browse:hover {

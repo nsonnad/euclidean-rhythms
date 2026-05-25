@@ -24,7 +24,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    margin-bottom: 50px;
+    margin-bottom: 2rem;
     width: 100%;
   }
 </style>
