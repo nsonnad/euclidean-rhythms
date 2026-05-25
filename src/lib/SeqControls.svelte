@@ -231,7 +231,7 @@
     background-color: black; /* Green */
     border: none;
     color: white;
-    padding: 10px 15px;
+    padding: 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
