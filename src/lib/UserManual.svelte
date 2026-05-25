@@ -84,9 +84,14 @@
     Linux users I assume can figure this out :)
   </p>
 
+  <h3>misc. tips</h3>
+  <ul>
+  <li>If it sounds like the samples are out of sync with each other, try pressing "pause" then "play" again.</li>
+  </ul>
+
   <h3>♥ donate ♥</h3>
   <p>
-    If you find this useful/fun/interesting, please consider donating to me (I'm
+    If you find this useful/fun/interesting, please consider <a href="https://github.com/sponsors/nsonnad">donating to me</a> (I'm
     a broke artist).
   </p>
 </div>

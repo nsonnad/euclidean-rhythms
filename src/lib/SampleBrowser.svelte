@@ -110,7 +110,7 @@
   }
 
   .sample-browser {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     position: fixed;
     top: 50%;
     left: 50%;
