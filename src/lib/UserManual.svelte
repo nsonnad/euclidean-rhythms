@@ -55,7 +55,7 @@
       "rotation" i.e. starting point of the first pulse.
     </li>
     <li>
-      Click "LOAD PRESET" to open the Eucldiean sequence preset browser which
+      Click "PRESETS" to open the Eucldiean sequence preset browser which
       includes brief explanations of traditional folk rhythms. Click on any of
       the number combinations to load that preset to the current sequence.
     </li>
