@@ -174,7 +174,7 @@
   </div>
 
 
-  <div class="ui-item">
+  <div class="ui-item delete-mute">
     <button class="delete-sequence ui-button" on:click={e => handleDeleteSeq(seq.id)}>X</button>
     {#if seq.mute}
       <button class="mute-sequence ui-button muted" on:click={e => handleToggleMute(seq.id)}>M</button>
@@ -193,7 +193,6 @@
     flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 14px;
-    gap: 10px;
   }
 
   div.seq-controls-sequence {
@@ -218,20 +217,8 @@
   }
 
   div.ui-item label {
-    display: block;
+    /* display: block; */
     margin-bottom: 8px;
-  }
-
-  div.ui-item select {
-    width: 200px;
-    height: 40px;
-    padding: 10px;
-    border: none;
-    border-bottom: 1px solid #999;
-    font-size: 18px;
-    font-family: monospace;
-    color: gray;
-    background-color: black;
   }
 
   button.ui-button {

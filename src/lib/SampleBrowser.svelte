@@ -82,18 +82,24 @@
       <h4>sample</h4>
       {#each sampleTree[currentDir] as file}
         {#if currentFile === file}
+        <div class="current-file">
           <button
             class="browser-list current"
-            on:click={() => handleFileClick(file)}>{file}</button
-          >
+            on:click={() => handleFileClick(file)}
+            >{file}
+          </button>
+          <button on:click={handleLoadSample}>LOAD ↘</button>
+        </div>
         {:else}
-          <button class="browser-list" on:click={() => handleFileClick(file)}>{file}</button>
+          <button class="browser-list" on:click={() => handleFileClick(file)}
+            >{file}</button
+          >
         {/if}
       {/each}
     </div>
-    <div class="browser-pane sample-controls">
-      <button class="load-sample" on:click={handleLoadSample}>LOAD SAMPLE</button>
-    </div>
+    <!-- <div class="browser-pane sample-controls"> -->
+    <!--   <button class="load-sample" on:click={handleLoadSample}>LOAD SAMPLE</button> -->
+    <!-- </div> -->
   </div>
   <button class="close-browser" on:click={closeSampleBrowser}> X </button>
 </div>
@@ -104,6 +110,7 @@
   }
 
   .sample-browser {
+    font-size: 1.1rem;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -139,11 +146,16 @@
     font-family: inherit;
     padding: 4px;
     cursor: pointer;
-    width: 100%;
+  }
+
+  div.current-file {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start;
+    background-color: violet;
   }
 
   button.current {
-    background-color: green;
   }
 
   button.close-browser {
@@ -161,7 +173,7 @@
 
   button.load-sample {
     cursor: pointer;
-    background-color: violet; /* Green */
+    background-color: violet;
     border: none;
     color: white;
     font-size: 26px;

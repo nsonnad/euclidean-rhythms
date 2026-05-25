@@ -47,7 +47,7 @@
     <li>
       Sample: Which sample is being used. Click the current sample to open the
       sample browser. In the browser, click on a sample to hear what it sounds
-      like, and click "LOAD SAMPLE" to swap out the current sample.
+      like, and click the "LOAD ↘" button to swap out the current sample.
     </li>
     <li>Sample level (volume), pitch, pan, attack, and release</li>
     <li>
